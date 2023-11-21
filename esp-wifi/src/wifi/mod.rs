@@ -601,6 +601,9 @@ static mut G_CONFIG: wifi_init_config_t = wifi_init_config_t {
     sta_disconnected_pm: false,
     espnow_max_encrypt_num: 7, // 2 for ESP32-C2
     magic: WIFI_INIT_CONFIG_MAGIC as i32,
+    // TODO: add these to CONFIG?
+    rx_mgmt_buf_num: 0,
+    rx_mgmt_buf_type: 0,
 };
 
 /// Get the STA MAC address
@@ -917,6 +920,8 @@ pub(crate) fn wifi_start_scan(
         show_hidden,
         scan_type,
         scan_time,
+        // TODO: What value to use?
+        home_chan_dwell_time: 0,
     };
 
     unsafe { esp_wifi_scan_start(&scan_config, block) }

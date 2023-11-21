@@ -26,71 +26,81 @@ fn main() -> Result<()> {
     let home = UserDirs::new().unwrap().home_dir().to_path_buf();
     let tools = home.join(".espressif").join("tools");
 
-    generate_bindings_for_chip(
-        "esp32",
-        Arch::Xtensa,
-        &workspace,
-        tools.join(
-            "xtensa-esp32-elf/esp-2021r2-patch5-8_4_0/xtensa-esp32-elf/xtensa-esp32-elf/include/",
-        ),
-        tools.join("xtensa-esp32-elf/esp-2021r2-patch5-8_4_0/xtensa-esp32-elf/"),
-    )?;
+    let esp32_version = "esp-12.2.0_20230208";
 
-    generate_bindings_for_chip(
-        "esp32c2",
-        Arch::RiscV,
-        &workspace,
-        tools.join(
-            "riscv32-esp-elf/esp-2021r2-patch5-8_4_0/riscv32-esp-elf/riscv32-esp-elf/include/",
-        ),
-        tools.join("riscv32-esp-elf/esp-2021r2-patch5-8_4_0/riscv32-esp-elf/"),
-    )?;
+    let riscv_include_path = tools.join(format!(
+        "riscv32-esp-elf/{esp32_version}/riscv32-esp-elf/riscv32-esp-elf/include/"
+    ));
+    let riscv_sysroot_path =
+        tools.join(format!("riscv32-esp-elf/{esp32_version}/riscv32-esp-elf/"));
 
-    generate_bindings_for_chip(
-        "esp32c3",
-        Arch::RiscV,
-        &workspace,
-        tools.join(
-            "riscv32-esp-elf/esp-2021r2-patch5-8_4_0/riscv32-esp-elf/riscv32-esp-elf/include/",
-        ),
-        tools.join("riscv32-esp-elf/esp-2021r2-patch5-8_4_0/riscv32-esp-elf/"),
-    )?;
+    // let xtensa_include_path = generate_bindings_for_chip(
+    //     "esp32",
+    //     Arch::Xtensa,
+    //     &workspace,
+    //     tools.join(format!(
+    //         "xtensa-esp32-elf/{esp32_version}/xtensa-esp32-elf/xtensa-esp32-elf/include/"
+    //     )),
+    //     tools.join(format!(
+    //         "xtensa-esp32-elf/{esp32_version}/xtensa-esp32-elf/"
+    //     )),
+    // )?;
 
-    generate_bindings_for_chip(
-        "esp32s2",
-        Arch::Xtensa,
-        &workspace,
-        tools.join("xtensa-esp32s2-elf/esp-2021r2-patch5-8_4_0/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include/"),
-        tools.join("xtensa-esp32s2-elf/esp-2021r2-patch5-8_4_0/xtensa-esp32s2-elf/")
-    )?;
+    // generate_bindings_for_chip(
+    //     "esp32c2",
+    //     Arch::RiscV,
+    //     &workspace,
+    //     riscv_include_path.clone(),
+    //     riscv_sysroot_path.clone(),
+    // )?;
 
-    generate_bindings_for_chip(
-        "esp32s3",
-        Arch::Xtensa,
-        &workspace,
-        tools.join("xtensa-esp32s3-elf/esp-2021r2-patch5-8_4_0/xtensa-esp32s3-elf/xtensa-esp32s3-elf/include/"),
-        tools.join("xtensa-esp32s3-elf/esp-2021r2-patch5-8_4_0/xtensa-esp32s3-elf/")
-    )?;
+    // generate_bindings_for_chip(
+    //     "esp32c3",
+    //     Arch::RiscV,
+    //     &workspace,
+    //     riscv_include_path.clone(),
+    //     riscv_sysroot_path.clone(),
+    // )?;
+
+    // generate_bindings_for_chip(
+    //     "esp32s2",
+    //     Arch::Xtensa,
+    //     &workspace,
+    //     tools.join(format!(
+    //         "xtensa-esp32s2-elf/{esp32_version}/xtensa-esp32s2-elf/xtensa-esp32s2-elf/include/"
+    //     )),
+    //     tools.join(format!(
+    //         "xtensa-esp32s2-elf/{esp32_version}/xtensa-esp32s2-elf/"
+    //     )),
+    // )?;
+
+    // generate_bindings_for_chip(
+    //     "esp32s3",
+    //     Arch::Xtensa,
+    //     &workspace,
+    //     tools.join(format!(
+    //         "xtensa-esp32s3-elf/{esp32_version}/xtensa-esp32s3-elf/xtensa-esp32s3-elf/include/"
+    //     )),
+    //     tools.join(format!(
+    //         "xtensa-esp32s3-elf/{esp32_version}/xtensa-esp32s3-elf/"
+    //     )),
+    // )?;
 
     generate_bindings_for_chip(
         "esp32c6",
         Arch::RiscV,
         &workspace,
-        tools.join(
-            "riscv32-esp-elf/esp-2021r2-patch5-8_4_0/riscv32-esp-elf/riscv32-esp-elf/include/",
-        ),
-        tools.join("riscv32-esp-elf/esp-2021r2-patch5-8_4_0/riscv32-esp-elf/"),
+        riscv_include_path.clone(),
+        riscv_sysroot_path.clone(),
     )?;
 
-    generate_bindings_for_chip(
-        "esp32h2",
-        Arch::RiscV,
-        &workspace,
-        tools.join(
-            "riscv32-esp-elf/esp-2021r2-patch5-8_4_0/riscv32-esp-elf/riscv32-esp-elf/include/",
-        ),
-        tools.join("riscv32-esp-elf/esp-2021r2-patch5-8_4_0/riscv32-esp-elf/"),
-    )?;
+    // generate_bindings_for_chip(
+    //     "esp32h2",
+    //     Arch::RiscV,
+    //     &workspace,
+    //     riscv_include_path.clone(),
+    //     riscv_sysroot_path.clone(),
+    // )?;
 
     Ok(())
 }

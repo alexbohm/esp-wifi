@@ -307,3 +307,36 @@ pub fn receive_queued(queue: *mut c_void, item: *mut c_void, block_time_tick: u3
         yield_task();
     }
 }
+
+extern "C" {
+    // TODO: is this already defined somewhere else?
+    fn esp_rom_delay_us(us: u32);
+}
+
+///
+/// Implementation of sleep() from newlib in esp-idf.
+/// components/newlib/time.c
+///
+#[no_mangle]
+unsafe extern "C" fn sleep(
+    seconds: crate::binary::c_types::c_uint,
+) -> crate::binary::c_types::c_uint {
+    trace!("sleep");
+
+    usleep(seconds * 1000000);
+
+    0
+}
+
+///
+/// Implementation of usleep() from newlib in esp-idf.
+/// components/newlib/time.c
+///
+#[no_mangle]
+unsafe extern "C" fn usleep(us: u32) -> crate::binary::c_types::c_int {
+    trace!("usleep");
+
+    esp_rom_delay_us(us);
+
+    0
+}

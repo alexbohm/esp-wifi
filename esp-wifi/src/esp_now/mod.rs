@@ -407,6 +407,12 @@ impl<'d> EspNowManager<'d> {
     pub fn set_rate(&self, rate: WifiPhyRate) -> Result<(), EspNowError> {
         check_error!({ esp_wifi_config_espnow_rate(wifi_interface_t_WIFI_IF_STA, rate as u32,) })
     }
+    // pub fn set_peer_rate(&self, peer: PeerInfo, rate: WifiPhyRate) -> Result<(), EspNowError> {
+    //     check_error!({
+    //         esp_now_set_peer_rate_config(peer.peer_address.as_ptr(), esp_now_rate_config_t {phymode: wi})
+    //     })
+    //     // check_error!({ esp_wifi_config_espnow_rate(wifi_interface_t_WIFI_IF_STA, rate as u32,) })
+    // }
 }
 
 /// This is the sender part of ESP-NOW. You can get this sender by splitting
@@ -770,7 +776,7 @@ unsafe extern "C" fn rcv_cb(
         rx_channel_estimate_len: (*rx_cntl).rx_channel_estimate_len(),
         second: (*rx_cntl).second(),
         channel: (*rx_cntl).channel(),
-        data_rssi: (*rx_cntl).data_rssi(),
+        data_rssi: (*rx_cntl).rssi(),
         noise_floor: (*rx_cntl).noise_floor(),
         is_group: (*rx_cntl).is_group(),
         rxend_state: (*rx_cntl).rxend_state(),

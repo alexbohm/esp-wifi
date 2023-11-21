@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2015-2021 Espressif Systems (Shanghai) CO LTD
+ * SPDX-FileCopyrightText: 2015-2023 Espressif Systems (Shanghai) CO LTD
  *
  * SPDX-License-Identifier: Apache-2.0
  */
@@ -11,6 +11,7 @@
 #include <stdbool.h>
 #include "esp_err.h"
 #include "sdkconfig.h"
+#include "esp_task.h"
 #include "esp_assert.h"
 
 #ifdef __cplusplus

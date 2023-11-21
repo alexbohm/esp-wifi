@@ -332,7 +332,7 @@ pub unsafe extern "C" fn gettimeofday(tv: *mut timespec, _tz: *mut ()) -> i32 {
     if !tv.is_null() {
         unsafe {
             let microseconds = esp_timer_get_time();
-            (*tv).tv_sec = (microseconds / 1_000_000) as i32;
+            (*tv).tv_sec = (microseconds / 1_000_000) as i64;
             (*tv).tv_nsec = (microseconds % 1_000_000) as i32 * 1000;
         }
     }

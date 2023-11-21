@@ -275,7 +275,9 @@ pub fn initialize(
     init_radio_clock_control(radio_clocks);
     init_rng(rng);
     init_tasks();
+    log::debug!("setup_timer_isr");
     setup_timer_isr(timer);
+    log::debug!("wifi_set_log_verbose");
     wifi_set_log_verbose();
     init_clocks();
 

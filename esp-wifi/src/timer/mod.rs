@@ -15,12 +15,13 @@ pub use arch_specific::*;
 pub use chip_specific::*;
 
 pub fn setup_timer_isr(timebase: TimeBase) {
+    log::debug!("setup_radio_isr");
     setup_radio_isr();
-
+    log::debug!("setup_timer");
     setup_timer(timebase);
-
+    log::debug!("setup_multitasking");
     setup_multitasking();
-
+    log::debug!("yield_task");
     yield_task();
 }
 
