@@ -602,7 +602,7 @@ static mut G_CONFIG: wifi_init_config_t = wifi_init_config_t {
     espnow_max_encrypt_num: 7, // 2 for ESP32-C2
     magic: WIFI_INIT_CONFIG_MAGIC as i32,
     // TODO: add these to CONFIG?
-    rx_mgmt_buf_num: 0,
+    rx_mgmt_buf_num: 5, // esp-idf defaults to 5.
     rx_mgmt_buf_type: 0,
 };
 
